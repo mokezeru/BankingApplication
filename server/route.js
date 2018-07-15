@@ -1,11 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const User = require('./user');
+<<<<<<< HEAD
 const jwt = require('jsonwebtoken');
 
 const secretkey = 'buvuzhila';
 
 router.post('/register', (req , res)=>{
+=======
+
+router.post('/bank/register', (req , res)=>{
+>>>>>>> 028c5045d938ef5eb7514696cbb758dc99521e05
     var conn = req.conn;
     var username = req.body.username;
     var accNum = req.body.accNum;
@@ -35,6 +40,7 @@ router.post('/register', (req , res)=>{
     })
 })
 
+<<<<<<< HEAD
 router.get('/login', (req, res) => {
 
   var user = {username: 'berry', acctnumber: '12345'};
@@ -46,6 +52,8 @@ router.get('/bank/ahmed',(req, res) => {
   res.json({name: 'Tester'});
 })
 
+=======
+>>>>>>> 028c5045d938ef5eb7514696cbb758dc99521e05
 function passwordgenerator(){
     return "test"; // to be done
 }
