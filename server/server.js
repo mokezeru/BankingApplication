@@ -7,8 +7,13 @@ var router = require('./route');
 const util = require('util');
 const mongoClient = require('mongodb').MongoClient;
 
-const url = "mongodb://localhost:27017/";
-const connection= util.promisify(mongoClient.connect)(url);
+const url = "mongodb://bankdbusername:bank12345@ds137601.mlab.com:37601/bankingappdb";
+const dbo = util.promisify(mongoClient.connect)(url);
+
+
+
+
+
 const app = express();
 const secretkey = 'buvuzhila';
 
@@ -22,7 +27,7 @@ app.use(cors());
 
 app.use(function(req,res,next){
   console.log('request recieved by middleware...conne')
-  req.conn = connection;
+  req.conn = dbo;
     return next();
 });
 
