@@ -12,7 +12,7 @@ import { ConfirmationComponent } from './maincomponents/confirmation.component';
 import { HttpModule } from '@angular/http';
 import { BankComponent } from './maincomponents/bank.component';
 
-const APP_ROUTES:Routes=[{path:'',component:HomeComponent},
+const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
                         {path:'home',component:HomeComponent},
                         {path:'register',component: RegisterComponent},
                         {path:'login',component:LoginComponent},
