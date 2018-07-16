@@ -38,6 +38,7 @@ function passwordgenerator(){
 }
 
 function sendRegistrationSuccessEmail(){
+<<<<<<< HEAD
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -61,6 +62,10 @@ function sendRegistrationSuccessEmail(){
         }
       });
    // return 'Notification Email Sent!';
+=======
+   
+    return 'Notification Email Sent!';
+>>>>>>> c086d2d704c819e81a4c234ea78dd2e835476754
 }
 
 module.exports=router;

@@ -12,8 +12,15 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
+<<<<<<< HEAD
     "express-validator": "^5.2.0",
     "mongodb": "^3.1.1",
     "nodemailer": "^4.6.7"
+=======
+    "express": "^4.16.3",
+    "express-validator": "^5.2.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongodb": "^3.1.1"
+>>>>>>> c086d2d704c819e81a4c234ea78dd2e835476754
   }
 }
