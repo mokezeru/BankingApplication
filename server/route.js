@@ -58,6 +58,35 @@ var sendToken = {username: username, acctNum: '12345'};
 //res.json({message:'done'});
 
 })
+
+router.get('/bank/checkbalance',(req,res)=>{
+  var conn = req.conn;
+  var userData=req.data;
+  var acctNum = userData.acctNum;
+
+      conn.then(db=>{
+        var dbo = db.db('bankdb');
+        dbo.collection('customers').find({acctnum:acctNum}).toArray((err, doc)=>{
+            if(err) res.json({error:'error'});
+            if(typeof doc!=='undefined'){
+
+
+                const account = doc[0];
+
+                const balance = account.balance;
+
+                    res.status(200).json({message:balance});
+
+            }else{
+                res.json({error:'error'});
+            }
+
+        })
+    })
+
+
+})
+
 router.get('/bank/ahmed',(req, res) => {
   res.json({name: 'Tester'});
 })

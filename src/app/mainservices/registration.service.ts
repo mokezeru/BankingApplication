@@ -20,7 +20,7 @@ export class RegistrationService {
     const options = new RequestOptions({headers: headers});
 
     // const headers = new HttpHeaders()
-          
+
     //       .set('Content-Type', 'application/json');
 
     // let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -33,7 +33,7 @@ export class RegistrationService {
       map((resp:Response)=>this.data=resp.json())
     );
 
-    
+
   }
   loginHandler(email,pw){
     const headers = new Headers();
@@ -46,6 +46,17 @@ export class RegistrationService {
     .pipe(
       map((resp:Response)=>this.data2=resp.json())
     );
-      
+
+  }
+
+  getBalance(){
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    var token = localStorage.getItem('token');
+    headers.append('authorization','Bearer '+token);
+
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.get('http://localhost:8080/api/checkbalance',options);
   }
 }
