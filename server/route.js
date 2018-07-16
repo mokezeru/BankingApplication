@@ -101,9 +101,58 @@ router.post("/login", (req, res) => {
   });
 
 });
-router.get("/bank/ahmed", (req, res) => {
-  res.json({ name: "Tester" });
-});
+
+router.get('/bank/checkbalance',(req,res)=>{
+  var conn = req.conn;
+  var userData=req.data;
+  var acctNum = userData.acctNum;
+
+  res.status(200).json({message:2000});
+
+      conn.then(db=>{
+        var dbo = db.db('bankdb');
+        dbo.collection('customers').findOne({acctnum:acctNum}, (err, doc) => {
+            if(err) res.json({error:'error'});
+            if(typeof doc!=='undefined'){
+                const account = doc;
+                const balance = account.balance;
+                    res.status(200).json({message:balance});
+            } else {
+                res.json({error:'error'});
+            }
+        })
+    })
+})
+
+router.post('/bank/transfer',(req,res)=>{
+  var conn = req.conn;
+  var userData = req.data;
+  var acctNum = userData.acctNum;
+  var transferAmount = req.body.amount;
+  var deduce = -1*transferAmount;
+  var beneficiaryAct = req.body.acctNum;
+
+  conn.then(db=>{
+      var dbo = db.db('bank');
+      dbo.collection('customers').findOne({acctNum:beneficiaryAct},(err,doc)=>{
+          if(err){
+              res.json({error:'beneficiary not a customer'})
+          }else{
+              dbo.collection('customers').update({acctNum:acctNum,balance:{$gt:transferAmount}},{$inc:{balance:deduce}},(err)=>{
+                  if(err) { res.json({error:'Insufficient Balance'})}
+                  else{
+                      dbo.collection('customers').update({acctNum:beneficiaryAct},{$inc:{balance:transferAmount}},(err)=>{
+                          if(err) throw err;
+                          res.json({message:'transfer success'});
+                      })
+                  }
+              })
+          }
+      }); //end of dbo.collec
+  });// end of conn.then
+})
+
+
 
 function passwordgenerator() {
   var text = "";

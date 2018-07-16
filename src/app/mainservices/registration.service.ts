@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http,Response,Headers, RequestOptions} from '@angular/http';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -20,19 +20,17 @@ export class RegistrationService {
     const options = new RequestOptions({headers: headers});
 
     // const headers = new HttpHeaders()
-
     //       .set('Content-Type', 'application/json');
 
     // let headers = new Headers({ 'Content-Type': 'application/json' });
     // let options = new RequestOptions({ headers: headers });
 
     console.log('from registration service');
-    return  this.http.post('http://localhost:8080/api/register',{username:username,acctNum:acctNum},options
+    return  this.http.post('http://localhost:8080/api/register', { username: username, acctNum: acctNum}, options
 )
     .pipe(
-      map((resp:Response)=>this.data=resp.json())
+      map((resp: Response) => this.data = resp.json())
     );
-
 
   }
   loginHandler(email, pw) {
@@ -46,5 +44,16 @@ export class RegistrationService {
       map((resp: Response) => this.data2 = resp.json())
     );
 
+  }
+
+  getBalance() {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const token = localStorage.getItem('token');
+    headers.append('authorization', 'Bearer ' + token);
+
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.get('http://localhost:8080/api/checkbalance', options);
   }
 }

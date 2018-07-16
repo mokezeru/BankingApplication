@@ -11,7 +11,7 @@ import { Route, Router } from '@angular/router';
           user name: <input type="text" #name (input)="userName=name.value" ><br><br>
           account number: <input type="text" #acct (input)="acctNum=acct.value"><br><br>
 
-          <button (click)='register(userName,acctNum)'>Register</button>
+          <button (click)="register(userName,acctNum)">Register</button>
 
     </div>
   `,
@@ -35,5 +35,6 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/']); // TODO: CHANGE THE url to error page
       }
     });
+
   }
 }

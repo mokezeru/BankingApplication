@@ -38,7 +38,8 @@ app.use('/api/bank', ensureToken ,(req,res,next)=> {
         res.json({error: 'Forbidden 2'})
       } else {
         console.log(data);
-        next();
+        req.data=data;
+        return next();
       }
   })
 });

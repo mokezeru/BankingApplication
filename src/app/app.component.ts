@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
   <a [routerLink]="['/']">Home</a> <br>
   <a [routerLink]="['about']">About</a><br>
   <a [routerLink]="['contactus']">Contact Us</a><br>
-  <a [routerLink]="['register']">Sign Up</a><br>
-  <a [routerLink]="['login']">Log in</a>
+  <a [routerLink]="['register']" >Sign Up</a><br>
+  <a [routerLink]="['login']" >Log in</a>
 </div>
             
             <router-outlet></router-outlet>
@@ -17,4 +17,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+ 
+
+  // hide():boolean{
+  //   if(typeof localStorage.getItem('token')!=='undefined'){
+  //     return true;
+  //   }
+  //   else return false;
+  // }
 }

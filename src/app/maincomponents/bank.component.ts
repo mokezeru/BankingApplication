@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'bank-comp',
@@ -14,10 +14,11 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class BankComponent implements OnInit {
-
+  @Output() emitter = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+    this.emitter.emit('clear');
   }
 
 }

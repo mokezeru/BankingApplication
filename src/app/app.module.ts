@@ -7,13 +7,14 @@ import { HomeComponent } from './maincomponents/home.component';
 import {RegisterComponent} from './register.component';
 import { LoginComponent } from './login.component';
 import { ContactUsComponent } from './contact-us.component';
-import {LogoutComponent} from './logout.component';
+import {LogoutComponent} from './maincomponents/logout.component';
 import { ConfirmationComponent } from './maincomponents/confirmation.component';
 import { HttpModule } from '@angular/http';
 import { BankComponent } from './maincomponents/bank.component';
 
 const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
                         {path: 'home', component: HomeComponent},
+<<<<<<< HEAD
                         {path: 'register', component: RegisterComponent},
                         {path: 'login', component: LoginComponent},
                         {path: 'contactus', component: ContactUsComponent},
@@ -21,6 +22,15 @@ const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
                         {path: 'confirmation', component: ConfirmationComponent},
                         {path: 'bankservices', component: BankComponent},
                         {path: 'api', loadChildren: './bankmodule/bank.module#BankModule'}];
+=======
+                        {path:'register',component: RegisterComponent},
+                        {path:'login',component:LoginComponent},
+                        {path:'contactus',component:ContactUsComponent},
+                        {path:'bankservices/logout',component:LogoutComponent},
+                        {path:'confirmation',component:ConfirmationComponent},
+                        {path:'bankservices',component:BankComponent},
+                        {path:'bankservices/api',loadChildren:'./bankmodule/bank.module#BankModule'}];
+>>>>>>> 1640e3d4b7f483954671f5f9d1b11e0673edb346
 
 @NgModule({
   declarations: [
