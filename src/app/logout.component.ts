@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-logout',
   template: `
-              <home-comp></home-comp>
+              
   `,
   styles: []
 })

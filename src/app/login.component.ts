@@ -6,7 +6,7 @@ import { Route, Router } from '@angular/router';
   selector: 'app-login',
   template: `
       <h3>Login</h3>
-    email: <input type="text" #username (input)="email=username.value" ><br><br>
+    email: <input type="text" #username required (input)="email=username.value" ><br><br>
     password: <input type="password" #pw (input)="password=pw.value" ><br><br>
     <button (click)="login(email,password)">Login</button>
   `,
