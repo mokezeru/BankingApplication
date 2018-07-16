@@ -7,6 +7,7 @@ import { CheckBalanceComponent } from './check-balance.component';
 import { TransferComponent } from './transfer.component';
 import { UpdateComponent } from './update.component';
 import { RegistrationService } from '../mainservices/registration.service';
+import {LocalService} from './services/local.service';
 
 const BANK_ROUTES =[{path:'bank/checkbalance',component:CheckBalanceComponent},
                     {path:'bank/transfer',component:TransferComponent},
@@ -22,7 +23,7 @@ const BANK_ROUTES =[{path:'bank/checkbalance',component:CheckBalanceComponent},
   imports: [
     BrowserModule
   ],
-  providers: [RegistrationService],
+  providers: [LocalService],
   bootstrap: [BankComponent]
 })
 export class BankModule { }
