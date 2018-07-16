@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const User = require('./user');
-const jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
 
-const secretkey = 'buvuzhila';
-
-router.post('/register', (req , res)=>{
+router.post('/bank/register', (req , res)=>{
     var conn = req.conn;
     var username = req.body.username;
     var accNum = req.body.accNum;
@@ -30,20 +28,9 @@ router.post('/register', (req , res)=>{
             }else{
                 res.sendStatus(403);
             }
-
+        
         })
     })
-})
-
-router.get('/login', (req, res) => {
-
-  var user = {username: 'berry', acctnumber: '12345'};
-  const token = jwt.sign(user, secretkey, {expiresIn: '1h'});
-  res.json({token: token});
-
-})
-router.get('/bank/ahmed',(req, res) => {
-  res.json({name: 'Tester'});
 })
 
 function passwordgenerator(){
@@ -51,6 +38,7 @@ function passwordgenerator(){
 }
 
 function sendRegistrationSuccessEmail(){
+   
     return 'Notification Email Sent!';
 }
 

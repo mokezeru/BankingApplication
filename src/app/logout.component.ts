@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'home-comp',
+  selector: 'app-logout',
   template: `
-  
+              <home-comp></home-comp>
   `,
   styles: []
 })
-export class HomeComponent implements OnInit {
+export class LogoutComponent implements OnInit {
 
   constructor() { }
 

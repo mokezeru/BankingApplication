@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'home-comp',
+  selector: 'app-check-balance',
   template: `
-  
+    <p>
+      check-balance works!
+    </p>
   `,
   styles: []
 })
-export class HomeComponent implements OnInit {
+export class CheckBalanceComponent implements OnInit {
 
   constructor() { }
 

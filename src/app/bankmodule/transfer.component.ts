@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'home-comp',
+  selector: 'app-transfer',
   template: `
-  
+    <p>
+      transfer works!
+    </p>
   `,
   styles: []
 })
-export class HomeComponent implements OnInit {
+export class TransferComponent implements OnInit {
 
   constructor() { }
 

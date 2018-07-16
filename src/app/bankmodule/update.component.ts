@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'home-comp',
+  selector: 'app-update',
   template: `
-  
+    <p>
+      update works!
+    </p>
   `,
   styles: []
 })
-export class HomeComponent implements OnInit {
+export class UpdateComponent implements OnInit {
 
   constructor() { }
 
