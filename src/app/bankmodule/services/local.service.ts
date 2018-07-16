@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class LocalService {
+  bal;
 
   constructor(private http:Http) { }
 
@@ -19,6 +20,7 @@ export class LocalService {
 
     const options = new RequestOptions({headers: headers});
 
-    return this.http.get('http://localhost:8080/api/checkbalance',options);
+    return this.http.get('http://localhost:8080/api/checkbalance',options)
+           .pipe(map(res=>this.bal=res.json()));
   }
 }

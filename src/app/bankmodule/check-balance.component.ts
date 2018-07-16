@@ -19,8 +19,9 @@ export class CheckBalanceComponent implements OnInit {
 
   ngOnInit() {
     this.ls.getBalance().subscribe(res=>{
-      this.balance = res.balance;
-    })
+      this.balance = res.message;
+      console.log('current balance: '+this.balance);
+    });
   }
 
   goToOptions(){
