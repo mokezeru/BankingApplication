@@ -12,12 +12,11 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router:Router) { 
-    
+  constructor(private router: Router) {
+
   }
 
   ngOnInit() {
-    
     localStorage.removeItem('token');
     this.router.navigate(['/']);
   }

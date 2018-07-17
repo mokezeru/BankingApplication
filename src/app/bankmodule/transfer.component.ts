@@ -6,35 +6,29 @@ import { Router } from '@angular/router';
   selector: 'app-transfer',
   template: `
    <div>
-    <form>
       Amount <input type="text" #amt (input)="transferAmount=amt.value"><br><br>
       Beneficiary Acct. <input type="text" #act ><br><br>
       <button type="submit" (click)="transfer(amt.value,act.value)">Transfer</button>
-
-    </form>
    </div>
   `,
   styles: []
 })
 export class TransferComponent implements OnInit {
 
-  constructor(private ls:LocalService,private router:Router) { }
+  constructor(private ls: LocalService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  transfer(amt,act){
-    this.ls.transferFund(amt,act).subscribe(res=>{
-      if(res.message!=null){
+  transfer(amt, act) {
+    this.ls.transferFund(amt, act).subscribe(res => {
+      if (res.message != null) {
         this.router.navigate(['transferconfirmation']);
-      }
-      else if(res.error=='Insufficient Balance'){
+      } else if (res.error === 'Insufficient Balance') {
         this.router.navigate(['transfererror']);
-      }
-      else{
+      } else {
         this.router.navigate(['error']);
       }
-    })
+    });
   }
-
 }

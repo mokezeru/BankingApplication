@@ -11,17 +11,27 @@ import {LocalService} from './services/local.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {BankGuardService} from './services/bank-guard.service';
+import { TransferConfirmComponent } from './transfer-confirm.component';
+import { TransferErrorComponent } from './transfer-error.component';
+import { UpdateConfirmationComponent } from './update-confirmation.component';
 
-const BANK_ROUTES =[{path:'bank/checkbalance',component:CheckBalanceComponent,canActivate: [BankGuardService]},
-                    {path:'bank/transfer',component:TransferComponent,canActivate:[BankGuardService]},
-                    {path:'bank/updatedetail',component:UpdateComponent,canActivate:[BankGuardService]}]
+const BANK_ROUTES =[{path: 'bank/checkbalance', component:CheckBalanceComponent,canActivate: [BankGuardService]},
+                    {path: 'bank/transfer', component:TransferComponent,canActivate:[BankGuardService]},
+                    {path: 'bank/updatedetail',component:UpdateComponent,canActivate:[BankGuardService]},
+                    {path: 'bank/transferconfirmation', component: TransferConfirmComponent},
+                    {path: 'bank/transfererror', component: TransferErrorComponent},
+                    {path: 'bank/updateconfirmation', component: UpdateConfirmationComponent}]
+
 
 @NgModule({
   declarations: [
     BankComponent,
     CheckBalanceComponent,
     TransferComponent,
-    UpdateComponent
+    UpdateComponent,
+    TransferConfirmComponent,
+    TransferErrorComponent,
+    UpdateConfirmationComponent
   ],
   imports: [
     CommonModule,
