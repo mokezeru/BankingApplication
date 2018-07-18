@@ -10,7 +10,7 @@ import {LocalService} from './services/local.service';
       <button (click)="goToOptions()">Ok</button>
     </div>
   `,
-  styleUrls: ['./bank.component.css']
+styleUrls: ['./bank.component.css']
 })
 export class CheckBalanceComponent implements OnInit {
   private balance;
