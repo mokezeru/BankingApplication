@@ -5,15 +5,17 @@ import { MatTabsModule } from '../../node_modules/@angular/material';
 @Component({
   selector: 'app-root',
   template: `
-  <div class='divlink'>
-    <a [routerLink]="['/']"><button  mat-button>Home</button></a>
-    <a [routerLink]="['/']"><button mat-button>About</button></a>
-    <a [routerLink]="['contactus']"><button mat-button>Contact Us</button></a>
-    <a [routerLink]="['register']" ><button mat-button>Sign Up</button></a>
-    <a [routerLink]="['login']" ><button mat-button>Login</button></a>
+  <div class="header">
+    <h1 class="headtext"> Online Banking App</h1>
   </div>
-
-  <div class='divlink'><router-outlet class="bbody"></router-outlet></div>
+  <div class='linkpanel'>
+    <a [routerLink]="['/']"><button class="matbut" mat-button>Home</button></a>
+    <a [routerLink]="['/']"><button class="matbut" mat-button>About</button></a>
+    <a [routerLink]="['contactus']"><button class="matbut" mat-button>Contact Us</button></a>
+    <a [routerLink]="['register']" ><button class="matbut" mat-button>Sign Up</button></a>
+    <a [routerLink]="['login']" ><button class="matbut" mat-button>Login</button></a>
+  </div>
+  <router-outlet class="bbody"></router-outlet>
   `,
   styleUrls: ['./app.component.css']
 })

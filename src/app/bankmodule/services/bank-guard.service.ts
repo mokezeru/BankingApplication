@@ -10,9 +10,8 @@ export class BankGuardService implements CanActivate{
   constructor(private router : Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean{
-    
+
     if(localStorage.getItem('token')) {
-      console.log(localStorage.getItem('token'));
       return true;}
     else{
       this.router.navigate(['/']);

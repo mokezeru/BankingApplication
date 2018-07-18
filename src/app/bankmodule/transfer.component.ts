@@ -6,19 +6,20 @@ import { FormGroup, FormBuilder, Validators } from '../../../node_modules/@angul
 @Component({
   selector: 'app-transfer',
   template: `
-  <form [formGroup]='transferForm' (ngSubmit)='transfer()'>
+  <form class="form-style-9" [formGroup]='transferForm' (ngSubmit)='transfer()'>
+  <h2><em>Transfer Fund</em></h2>
   <div>
-        Amount : <input type="text"
-                          formControlName='amount'><br><br>
-        <div *ngIf="!transferForm.controls['amount'].valid">Invalid Amount</div>
-        Beneficiary Account #: <input type="text"
-                               formControlName='acctNum'><br><br>
-        <div *ngIf="!transferForm.controls['acctNum'].valid">Invalid Account Number</div>
-        <button type="submit" [disabled]='!transferForm.valid'>Submit</button>
+  <ul> <label>Amount:</label><li> <input class="field-style field-split align-left" type="text"
+                          formControlName='amount'>
+        <span class="error" *ngIf="!transferForm.controls['amount'].valid">Invalid Amount</span></li></ul>
+        <ul> <label>Beneficiary Account #:</label><li> <input class="field-style field-split align-left" type="text"
+                               formControlName='acctNum'>
+        <span class="error" *ngIf="!transferForm.controls['acctNum'].valid">Invalid Account Number</span></li></ul>
+        <ul><li><button class="form-style-9 ul li" type="submit" [disabled]="!transferForm.valid">Transfer</button></li></ul>
   </div>
   </form>
   `,
-  styles: []
+  styleUrls: ['./bank.component.css']
 })
 export class TransferComponent implements OnInit {
   transferForm: FormGroup;

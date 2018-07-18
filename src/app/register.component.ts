@@ -6,20 +6,21 @@ import { FormGroup, FormBuilder, Validators } from '../../node_modules/@angular/
 @Component({
   selector: 'app-register',
   template: `
-    <p>Register below</p>
-    <form [formGroup]='myRegForm' (ngSubmit)='register()'>
+
+    <form class="form-style-9" [formGroup]='myRegForm' (ngSubmit)='register()'>
+    <h2><em>Register</em></h2>
     <div>
-          User Name: <input type="text"
-                            formControlName='username'><br><br>
-          <div *ngIf="!myRegForm.controls['username'].valid">Invalid Username</div>
-          Account Number: <input type="text"
-                                 formControlName='acctNum'><br><br>
-          <div *ngIf="!myRegForm.controls['username'].valid">Invalid Account Number</div>
-          <button type="submit" [disabled]='!myRegForm.valid'>Submit</button>
+      <ul> <label> User Name: </label><li><input class="field-style field-split align-left" type="text"
+                            formControlName='username'>
+          <span class="error" *ngIf="!myRegForm.controls['username'].valid">Invalid Username</span></li></ul>
+      <ul> <label>Account Number: </label><li> <input class="field-style field-split align-left" type="text"
+                                 formControlName='acctNum'>
+          <span class="error" *ngIf="!myRegForm.controls['acctNum'].valid">Invalid Account Number</span></li></ul>
+          <ul><li><button class="form-style-9 ul li" type="submit" [disabled]="!myRegForm.valid">Sign Up</button></li></ul>
     </div>
     </form>
   `,
-  styles: []
+  styleUrls: ['./app.component.css']
 })
 export class RegisterComponent implements OnInit {
   private registartionData;

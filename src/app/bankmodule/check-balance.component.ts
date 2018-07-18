@@ -5,12 +5,12 @@ import {LocalService} from './services/local.service';
 @Component({
   selector: 'app-check-balance',
   template: `
-    <div>
+    <div class="form-style-9">
       Your current balance : {{balance}} <br><br>
       <button (click)="goToOptions()">Ok</button>
     </div>
   `,
-  styles: []
+  styleUrls: ['./bank.component.css']
 })
 export class CheckBalanceComponent implements OnInit {
   private balance;
