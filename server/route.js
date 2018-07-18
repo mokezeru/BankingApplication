@@ -127,8 +127,6 @@ router.post("/bank/transfer", (req, res) => {
   var conn = req.conn;
   var userData = req.data;
   var acctNum = parseInt(userData.acctNum);
-  console.log(acctNum);
-
   var transferAmount = parseInt(req.body.amount);
   var deduce = -1 * transferAmount;
   var beneficiaryAct = parseInt(req.body.acctNum);
@@ -175,55 +173,6 @@ router.post("/bank/transfer", (req, res) => {
       }
     });
   });
-
-  // conn.then(db => {
-  //   var dbo = db.db("bankingappdb");
-  //   dbo
-  //     .collection("customers")
-  //     .findOne({ acctNum: beneficiaryAct }, (err, doc) => {
-  //       if (err) {
-  //           throw err;
-  //         res.json({ error: "beneficiary not a customer" });
-  //       } else {
-  //         dbo
-  //           .collection("customers")
-  //           .findOne(
-  //             { acctNum: acctNum, balance: { $gt: transferAmount } },
-  //             (err, resp) => {
-  //               if (err) {
-  //                 throw err;
-  //                 console.log('jjjjjjjjjj');
-  //                 res.json({ error: "Insufficient Balance" });
-  //               } else {
-  //                 console.log('Response: '+resp);
-
-  //                 dbo
-  //           .collection("customers")
-  //           .updateOne(
-  //             { acctNum: acctNum},
-  //             { $inc: { balance: deduce } },
-  //             (err, resp) => {
-  //               console.log('Deducted!');
-  //             })
-
-  //                 dbo
-  //                   .collection("customers")
-  //                   .update(
-  //                     { acctNum: beneficiaryAct },
-  //                     { $inc: { balance: transferAmount } },
-  //                     err => {
-  //                       if (err) throw err;
-  //                       console.log('Transfer');
-  //                       res.json({ message: "transfer success" });
-
-  //                     }
-  //                   );
-  //                 }
-  //             }
-  //           );
-  //       }
-  //     }); //end of dbo.collec
-  // }); // end of conn.then
 });
 
 router.put("/bank/updatedetails", (req, res) => {
@@ -328,7 +277,7 @@ function sendTransferSuccessEmail(sEmail, rEmail, amount, sAccount, rAccount) {
             Amount: ${amount}
             Transaction Date: ${new Date()}
             Thank you!
-            `
+           `
   };
 
   transporter.sendMail(mailOptions, function(error, info) {

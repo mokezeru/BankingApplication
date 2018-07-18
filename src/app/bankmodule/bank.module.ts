@@ -17,13 +17,13 @@ import { UpdateConfirmationComponent } from './update-confirmation.component';
 import { ReactiveFormsModule } from '../../../node_modules/@angular/forms';
 import { TransferFailureComponent } from './transfer-failure.component';
 
-const BANK_ROUTES =[{path: 'bank/checkbalance', component:CheckBalanceComponent,canActivate: [BankGuardService]},
-                    {path: 'bank/transfer', component:TransferComponent,canActivate:[BankGuardService]},
-                    {path: 'bank/updatedetail',component:UpdateComponent,canActivate:[BankGuardService]},
-                    {path: 'bank/transferconfirmation', component: TransferConfirmComponent},
-                    {path: 'bank/transfererror', component: TransferErrorComponent},
-                    {path: 'bank/updateconfirmation', component: UpdateConfirmationComponent},
-                    {path: 'bank/error', component: TransferFailureComponent}];
+const BANK_ROUTES = [{path: 'bank/checkbalance', component: CheckBalanceComponent, canActivate: [BankGuardService]},
+                     {path: 'bank/transfer', component: TransferComponent, canActivate: [BankGuardService]},
+                     {path: 'bank/updatedetail', component: UpdateComponent, canActivate: [BankGuardService]},
+                     {path: 'bank/transferconfirmation', component: TransferConfirmComponent},
+                     {path: 'bank/transfererror', component: TransferErrorComponent},
+                     {path: 'bank/updateconfirmation', component: UpdateConfirmationComponent},
+                     {path: 'bank/error', component: TransferFailureComponent}];
 
 
 @NgModule({
@@ -42,7 +42,7 @@ const BANK_ROUTES =[{path: 'bank/checkbalance', component:CheckBalanceComponent,
     ReactiveFormsModule,
     RouterModule.forChild(BANK_ROUTES)
   ],
-  providers: [LocalService,BankGuardService],
+  providers: [LocalService, BankGuardService],
   bootstrap: [BankComponent]
 })
 export class BankModule { }

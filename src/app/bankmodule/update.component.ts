@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '../../../node_modules/@angul
   <h2><em>Change Profile</em></h2>
   <div>
         <ul> <label>Street:</label><li> <input class="field-style field-split align-left" type="text"
-                        formControlName='street'><br><br></li></ul>
+                              formControlName='street'><br><br></li></ul>
         <ul> <label>City:</label><li>  <input class="field-style field-split align-left" type="text"
                                formControlName='city'><br><br></li></ul>
         <ul> <label>State:</label><li> <input class="field-style field-split align-left" type="text"

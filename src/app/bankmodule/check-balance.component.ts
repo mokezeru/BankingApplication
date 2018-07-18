@@ -13,18 +13,18 @@ import {LocalService} from './services/local.service';
 styleUrls: ['./bank.component.css']
 })
 export class CheckBalanceComponent implements OnInit {
-  private balance;
+  public balance;
 
-  constructor(private ls:LocalService,private router:Router) { }
+  constructor(private ls: LocalService, private router: Router) { }
 
   ngOnInit() {
-    this.ls.getBalance().subscribe(res=>{
+    this.ls.getBalance().subscribe(res => {
       this.balance = res.message;
-      console.log('current balance: '+this.balance);
+      console.log('current balance: ' + this.balance);
     });
   }
 
-  goToOptions(){
+  goToOptions() {
     this.router.navigate(['bankservices']);
   }
 

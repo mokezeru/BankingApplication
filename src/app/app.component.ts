@@ -10,13 +10,13 @@ import { MatTabsModule } from '../../node_modules/@angular/material';
   </div>
   <div class='linkpanel'>
     <a [routerLink]="['/']"><button class="matbut" mat-button>Home</button></a>
-    <a [routerLink]="['/']"><button class="matbut" mat-button>About</button></a>
+    <a [routerLink]="['aboutus']"><button class="matbut" mat-button>About Us</button></a>
     <a [routerLink]="['contactus']"><button class="matbut" mat-button>Contact Us</button></a>
     <a [routerLink]="['register']" ><button class="matbut" mat-button>Sign Up</button></a>
     <a [routerLink]="['login']" ><button class="matbut" mat-button>Login</button></a>
   </div>
   <router-outlet class="bbody"></router-outlet>
-  `,
+   `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

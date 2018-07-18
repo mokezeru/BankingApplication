@@ -17,6 +17,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AboutusComponent } from './aboutus.component';
 
 
 const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
@@ -24,6 +25,7 @@ const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
                         {path: 'register', component: RegisterComponent},
                         {path: 'login', component: LoginComponent},
                         {path: 'contactus', component: ContactUsComponent},
+                        {path: 'aboutus', component: AboutusComponent},
                         {path: 'bankservices/logout', component: LogoutComponent},
                         {path: 'confirmation', component: ConfirmationComponent},
                         {path: 'bankservices', component: BankComponent},
@@ -39,7 +41,8 @@ const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
     HomeComponent,
     ConfirmationComponent,
     BankComponent,
-    MainNavComponent
+    MainNavComponent,
+    AboutusComponent
   ],
   imports: [
     BrowserModule,
