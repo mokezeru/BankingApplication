@@ -23,7 +23,7 @@ router.post("/register", (req, res) => {
       .collection("customers")
       .findOne({ acctNum: parseInt(acctNum) }, (err, doc) => {
         if (err) {
-          res.json({ error: 'error'});
+          res.json({ error: "error" });
         } else {
           if (typeof doc !== "undefined") {
             if (doc.isAppUser == 0) {
@@ -45,19 +45,17 @@ router.post("/register", (req, res) => {
                 err => {
                   if (err) {
                     res.json({ error: "error" });
-                  } else  {
-
-                  console.log("isAppUser: " + doc.isAppUser);
-                  res
-                    .status(200)
-                    .json({ message: "Acount Created Successfully" });
+                  } else {
+                    console.log("isAppUser: " + doc.isAppUser);
+                    res
+                      .status(200)
+                      .json({ message: "Acount Created Successfully" });
+                  }
                 }
-              }
               );
             } else {
               res.status(200).json({ message: "You are already an app user!" });
             }
-
           } else {
             res.json({ error: "error" });
           }
@@ -78,7 +76,7 @@ router.post("/login", (req, res) => {
       .findOne(
         { "appUser.userName": username, "appUser.password": pw },
         (err, doc) => {
-          console.log('Checking Doc: ' + doc);
+          console.log("Checking Doc: " + doc);
           if (err) {
             console.log("DB Error");
             res.json({ error: "error" });
@@ -103,15 +101,18 @@ router.post("/login", (req, res) => {
 router.get("/bank/checkbalance", (req, res) => {
   var conn = req.conn;
   var userData = req.data;
-  var acctNum = userData.acctNum;
+  var acctNum = parseInt(userData.acctNum);
+  console.log("Account Num: " + acctNum);
 
- // res.status(200).json({ message: 2000 });
+  // res.status(200).json({ message: 2000 });
 
   conn.then(db => {
+    console.log("Account Num2: " + acctNum);
     var dbo = db.db("bankingappdb");
-    dbo.collection("customers").findOne({ acctnum: acctNum }, (err, doc) => {
+    dbo.collection("customers").findOne({ acctNum: acctNum }, (err, doc) => {
       if (err) res.json({ error: "error" });
       if (typeof doc !== "undefined") {
+        console.log(doc);
         const account = doc;
         const balance = account.balance;
         res.status(200).json({ message: balance });
@@ -131,70 +132,135 @@ router.post("/bank/transfer", (req, res) => {
   var transferAmount = parseInt(req.body.amount);
   var deduce = -1 * transferAmount;
   var beneficiaryAct = parseInt(req.body.acctNum);
+  var sEmail;
+  var rEmail;
 
-  conn.then(db => {
-    var dbo = db.db("bankingappdb");
-    dbo
-      .collection("customers")
-      .findOne({ acctNum: beneficiaryAct }, (err, doc) => {
-        if (err) {
-
-          res.json({ error: "beneficiary not a customer" });
-        } else {
-          dbo
-            .collection("customers")
-            .update(
-              { acctNum: acctNum, balance: { $gt: transferAmount } },
-              { $inc: { balance: deduce } },
-              err => {
-                if (err) {
-                  console.log('jjjjjjjjjj');
-                  res.json({ error: "Insufficient Balance" });
-                } else {
-                  dbo
-                    .collection("customers")
-                    .update(
-                      { acctNum: beneficiaryAct },
-                      { $inc: { balance: transferAmount } },
-                      err => {
-                        if (err) throw err;
-                        console.log('Transfer');
-                        res.json({ message: "transfer success" });
-
-                      }
-                    );
+  conn.then(con => {
+    var dbo = con.db("bankingappdb");
+    dbo.collection("customers").findOne({ acctNum: acctNum }, (err, doc) => {
+      var curbalance = doc.balance;
+      sEmail = doc.address.email;
+      if (transferAmount < curbalance) {
+        dbo
+          .collection("customers")
+          .findOne({ acctNum: beneficiaryAct }, (err, doc) => {
+            if (doc !== null) {
+              rEmail = doc.address.email;
+              dbo
+                .collection("customers")
+                .updateOne(
+                  { acctNum: acctNum },
+                  { $inc: { balance: deduce } },
+                  (err, resp) => {
+                    console.log("Deducted!");
                   }
-              }
-            );
-        }
-      }); //end of dbo.collec
-  }); // end of conn.then
+                );
+              dbo
+                .collection("customers")
+                .update(
+                  { acctNum: beneficiaryAct },
+                  { $inc: { balance: transferAmount } },
+                  err => {
+                    if (err) throw err;
+                    console.log("Transfer");
+                    res.json({ message: "transfer success" });
+                  });
+                  sendTransferSuccessEmail(sEmail, rEmail, transferAmount, acctNum, beneficiaryAct)
+            } else {
+              res.json({ error: "Customer Does Not Exist" });
+            }
+          });
+      } else {
+        res.json({ error: "Insufficient Balance" });
+      }
+    });
+  });
+
+  // conn.then(db => {
+  //   var dbo = db.db("bankingappdb");
+  //   dbo
+  //     .collection("customers")
+  //     .findOne({ acctNum: beneficiaryAct }, (err, doc) => {
+  //       if (err) {
+  //           throw err;
+  //         res.json({ error: "beneficiary not a customer" });
+  //       } else {
+  //         dbo
+  //           .collection("customers")
+  //           .findOne(
+  //             { acctNum: acctNum, balance: { $gt: transferAmount } },
+  //             (err, resp) => {
+  //               if (err) {
+  //                 throw err;
+  //                 console.log('jjjjjjjjjj');
+  //                 res.json({ error: "Insufficient Balance" });
+  //               } else {
+  //                 console.log('Response: '+resp);
+
+  //                 dbo
+  //           .collection("customers")
+  //           .updateOne(
+  //             { acctNum: acctNum},
+  //             { $inc: { balance: deduce } },
+  //             (err, resp) => {
+  //               console.log('Deducted!');
+  //             })
+
+  //                 dbo
+  //                   .collection("customers")
+  //                   .update(
+  //                     { acctNum: beneficiaryAct },
+  //                     { $inc: { balance: transferAmount } },
+  //                     err => {
+  //                       if (err) throw err;
+  //                       console.log('Transfer');
+  //                       res.json({ message: "transfer success" });
+
+  //                     }
+  //                   );
+  //                 }
+  //             }
+  //           );
+  //       }
+  //     }); //end of dbo.collec
+  // }); // end of conn.then
 });
 
-router.put("/bank/updatedetails", (req,res) => {
+router.put("/bank/updatedetails", (req, res) => {
   var dbconn = req.conn;
   var dbo;
   var userData = req.data;
   var acctNum = parseInt(userData.acctNum);
-  var st= req.body.street;
-  var ct= req.body.city;
-  var sta= req.body.state;
-  var zip= req.body.zip;
-  var ph= req.body.phone;
+  var st = req.body.street;
+  var ct = req.body.city;
+  var sta = req.body.state;
+  var zip = req.body.zip;
+  var ph = req.body.phone;
   dbconn.then(db => {
-    dbo = db.db('bankingappdb');
-    dbo.collection('customers').update({acctNum: acctNum},
-        {$set: {'address.street': st, 'address.city': ct, 'address.state': sta, 'address.zip': zip, 'address.phone': ph }},(err) =>
-          {
-            if(err){
-                res.json({error: 'error'});
-            }else{
-                res.json({message: 'updateSuccess'});
-            }
-          });// End of Db.collection
-  })
-
-})
+    dbo = db.db("bankingappdb");
+    dbo
+      .collection("customers")
+      .update(
+        { acctNum: acctNum },
+        {
+          $set: {
+            "address.street": st,
+            "address.city": ct,
+            "address.state": sta,
+            "address.zip": zip,
+            "address.phone": ph
+          }
+        },
+        err => {
+          if (err) {
+            res.json({ error: "error" });
+          } else {
+            res.json({ message: "updateSuccess" });
+          }
+        }
+      ); // End of Db.collection
+  });
+});
 
 function passwordgenerator() {
   var text = "";
@@ -228,7 +294,41 @@ function sendRegistrationSuccessEmail(pw, email) {
     text: `Dear Customer you have successfully signed up into our system!
             Your Password is: ${pw}
             Enjoy our service in your comfort zone!
-          `
+                 `
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+}
+
+function sendTransferSuccessEmail(sEmail, rEmail, amount, sAccount, rAccount) {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "bankingapp.mwa@gmail.com",
+      pass: "meba2018"
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  var mailOptions = {
+    from: "bankingapp.mwa@gmail.com",
+    to: [sEmail, rEmail],
+    subject: "Transaction Notification",
+    text: `Transfer Done Successfuly
+            Sender Account: ${sAccount}
+            Receiver Account: ${rAccount}
+            Amount: ${amount}
+            Transaction Date: ${new Date()}
+            Thank you!
+            `
   };
 
   transporter.sendMail(mailOptions, function(error, info) {

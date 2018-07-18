@@ -11,16 +11,23 @@ import {LogoutComponent} from './maincomponents/logout.component';
 import { ConfirmationComponent } from './maincomponents/confirmation.component';
 import { HttpModule } from '@angular/http';
 import { BankComponent } from './maincomponents/bank.component';
+import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
+import { MatTabsModule, MatFormFieldModule, MatLabel } from '../../node_modules/@angular/material';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
                         {path: 'home', component: HomeComponent},
                         {path: 'register', component: RegisterComponent},
-                        {path: 'login',component:LoginComponent},
-                        {path: 'contactus',component:ContactUsComponent},
-                        {path: 'bankservices/logout',component:LogoutComponent},
-                        {path: 'confirmation',component:ConfirmationComponent},
-                        {path: 'bankservices',component:BankComponent},
-                        {path: 'bankservices/api',loadChildren:'./bankmodule/bank.module#BankModule'}];
+                        {path: 'login', component: LoginComponent},
+                        {path: 'contactus', component: ContactUsComponent},
+                        {path: 'bankservices/logout', component: LogoutComponent},
+                        {path: 'confirmation', component: ConfirmationComponent},
+                        {path: 'bankservices', component: BankComponent},
+                        {path: 'bankservices/api', loadChildren: './bankmodule/bank.module#BankModule'}];
 
 @NgModule({
   declarations: [
@@ -31,12 +38,24 @@ const APP_ROUTES: Routes = [{path: '', component: HomeComponent},
     LogoutComponent,
     HomeComponent,
     ConfirmationComponent,
-    BankComponent
+    BankComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(APP_ROUTES)
+    FormsModule,
+    ReactiveFormsModule,
+    MatTabsModule,
+    RouterModule.forRoot(APP_ROUTES),
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

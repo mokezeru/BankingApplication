@@ -14,13 +14,16 @@ import {BankGuardService} from './services/bank-guard.service';
 import { TransferConfirmComponent } from './transfer-confirm.component';
 import { TransferErrorComponent } from './transfer-error.component';
 import { UpdateConfirmationComponent } from './update-confirmation.component';
+import { ReactiveFormsModule } from '../../../node_modules/@angular/forms';
+import { TransferFailureComponent } from './transfer-failure.component';
 
 const BANK_ROUTES =[{path: 'bank/checkbalance', component:CheckBalanceComponent,canActivate: [BankGuardService]},
                     {path: 'bank/transfer', component:TransferComponent,canActivate:[BankGuardService]},
                     {path: 'bank/updatedetail',component:UpdateComponent,canActivate:[BankGuardService]},
                     {path: 'bank/transferconfirmation', component: TransferConfirmComponent},
                     {path: 'bank/transfererror', component: TransferErrorComponent},
-                    {path: 'bank/updateconfirmation', component: UpdateConfirmationComponent}]
+                    {path: 'bank/updateconfirmation', component: UpdateConfirmationComponent},
+                    {path: 'bank/error', component: TransferFailureComponent}];
 
 
 @NgModule({
@@ -31,10 +34,12 @@ const BANK_ROUTES =[{path: 'bank/checkbalance', component:CheckBalanceComponent,
     UpdateComponent,
     TransferConfirmComponent,
     TransferErrorComponent,
-    UpdateConfirmationComponent
+    UpdateConfirmationComponent,
+    TransferFailureComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(BANK_ROUTES)
   ],
   providers: [LocalService,BankGuardService],
